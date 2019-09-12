@@ -55,5 +55,6 @@ class WCCPP_Admin {
 		}
 
 		// Styles.
+		wp_enqueue_style( 'wc_country_product_price_admin_styles', WCCPP()->plugin_url() . 'assets/css/admin.css', array(), WCCPP()->version );
 	}
 }

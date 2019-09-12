@@ -118,7 +118,7 @@ class WooCommerce_Country_Product_Price {
 		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 			// Admin request.
 			WCCPP_Admin::init();
-			// WCCPP_Admin_Meta_Boxes::init();
+			WCCPP_Admin_Meta_Boxes::init();
 		}
 	}
 }
