@@ -34,7 +34,7 @@ if ( ! class_exists( 'WC_Settings_Country_Product_Price' ) ) :
 			$this->zone_id = empty( $_GET['zone_id'] ) ? false : wc_clean( wp_unslash( $_GET['zone_id'] ) ); // WPCS: CSRF ok.
 
 			$this->init_hooks();
-			// $this->delete_zone();
+			$this->delete_zone();
 		}
 
 		/**
@@ -48,27 +48,27 @@ if ( ! class_exists( 'WC_Settings_Country_Product_Price' ) ) :
 			add_action( 'woocommerce_settings_save_' . $this->id, array( $this, 'save' ) );
 		}
 
-		// /**
-		//  * Delete a zone
-		//  */
-		// protected function delete_zone() {
-		// 	if ( ! empty( $_GET['delete_zone'] ) && isset( $_GET['tab'] ) && 'country-product-price' === $_GET['tab'] && isset( $_GET['section'] ) && 'zones' === $_GET['section'] ) { // WPCS: CSRF ok.
+		/**
+		 * Delete a zone
+		 */
+		protected function delete_zone() {
+			if ( ! empty( $_GET['delete_zone'] ) && isset( $_GET['tab'] ) && 'country-product-price' === $_GET['tab'] && isset( $_GET['section'] ) && 'zones' === $_GET['section'] ) { // WPCS: CSRF ok.
 
-		// 		if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wc-country-product-price-delete-zone' ) ) { // WPCS: input var ok, sanitization ok.
-		// 			wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce' ) );
-		// 		}
+				if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wc-country-product-price-delete-zone' ) ) { // WPCS: input var ok, sanitization ok.
+					wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'woocommerce' ) );
+				}
 
-		// 		$zone = WCCPP_Pricing_Zones::get_zone_by_id( wc_clean( wp_unslash( $_GET['delete_zone'] ) ) );
-		// 		if ( ! $zone ) {
-		// 			wp_die( esc_html__( 'Zone does not exist!', 'wc-country-product-price' ) );
-		// 		}
+				$zone = WCCPP_Pricing_Zones::get_zone_by_id( wc_clean( wp_unslash( $_GET['delete_zone'] ) ) );
+				if ( ! $zone ) {
+					wp_die( esc_html__( 'Zone does not exist!', 'wc-country-product-price' ) );
+				}
 
-		// 		WCCPP_Pricing_Zones::delete( $zone );
+				WCCPP_Pricing_Zones::delete( $zone );
 
-		// 		WC_Admin_Settings::add_message( __( 'Zone have been deleted.', 'wc-country-product-price' ) );
+				WC_Admin_Settings::add_message( __( 'Zone have been deleted.', 'wc-country-product-price' ) );
 
-		// 	}
-		// }
+			}
+		}
 
 		/**
 		 * Checks the current section
