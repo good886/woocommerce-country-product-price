@@ -1,6 +1,19 @@
 <?php
 
 /**
+ * Return the current pricing zone. Alias of WCCPP()->current_zone.
+ *
+ * @since 1.0.0
+ * @return WCCPP_Pricing_Zone
+ */
+function wccpp_the_zone() {
+	if ( wccpp()->current_zone ) {
+		return wccpp()->current_zone;
+	};
+	return false;
+}
+
+/**
  * Return is a value is empty and no-zero
  *
  * @since 1.0.0
@@ -34,16 +47,66 @@ function wccpp_get_woocommerce_country() {
 
 	$country = false;
 
-	// if ( wccpp_is_woocommerce_frontend() ) {
+	if ( wccpp_is_woocommerce_frontend() ) {
+		$location = WC_Geolocation::geolocate_ip();
 
-	// 	$country          = wccpp_get_prop_value( wc()->customer, 'billing_country' );
-	// 	$shipping_country = wc()->customer->get_shipping_country();
-	// 	if ( ! empty( $shipping_country ) && $country !== $shipping_country && 'shipping' === get_option( 'wc_price_based_country_based_on', 'billing' ) ) {
-	// 		$country = $shipping_country;
-	// 	}
-	// }
+		if ( $location && !empty($location['country'])) {
+			$country = $location['country']; // example: IT, DE
+		}
+
+		// $country          = wccpp_get_prop_value( wc()->customer, 'billing_country' );
+		// $shipping_country = wc()->customer->get_shipping_country();
+		// if ( ! empty( $shipping_country ) && $country !== $shipping_country && 'shipping' === get_option( 'wc_price_based_country_based_on', 'billing' ) ) {
+		// 	$country = $shipping_country;
+		// }
+
+	}
 
 	return $country;
+}
+
+/**
+ * Return the object property value. Add compatibility with WC 2.6
+ *
+ * @param mixed  $object The object instance.
+ * @param string $prop_name Property name.
+ * @return mixed
+ */
+function wccpp_get_prop_value( $object, $prop_name ) {
+	$props   = is_array( $prop_name ) ? $prop_name : array( $prop_name );
+	$value   = array();
+	$mapping = array(
+		'billing_country' => 'get_country',
+		'parent_id'       => 'get_parent',
+		'type'            => 'get_type',
+		'amount'          => 'coupon_amount',
+	);
+
+	if ( version_compare( WC_VERSION, '3.0', '>=' ) ) {
+		foreach ( $props as $prop ) {
+			$get            = 'get_' . $prop;
+			$value[ $prop ] = $object->{$get}();
+		}
+	} else {
+		foreach ( $props as $prop ) {
+			$get            = ! empty( $mapping[ $prop ] ) ? $mapping[ $prop ] : $prop;
+			$value[ $prop ] = 'get_' === substr( $get, 0, 4 ) ? $object->{$get}() : $object->$get;
+		}
+	}
+
+	if ( 1 === count( $value ) ) {
+		$value = $value[ $prop_name ];
+	}
+	return $value;
+}
+
+/**
+ * Check is WooCommerce frontend
+ *
+ * @return bool
+ */
+function wccpp_is_woocommerce_frontend() {
+	return function_exists( 'WC' ) && ! empty( WC()->customer );
 }
 
 /**
