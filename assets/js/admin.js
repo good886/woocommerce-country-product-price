@@ -18,7 +18,7 @@ jQuery( function( $ ) {
 	// 		$( 'body' ).on( 'change', '.wccpp_sale_price[type=text]', this.sale_price_change );
 	// 		$( document.body ).on( 'woocommerce_variations_added', this.show_and_hide_panels );
 	// 		$( '#woocommerce-product-data' ).on( 'woocommerce_variations_loaded', this.show_and_hide_panels );
-	// 		$( document.body ).on( 'wc_price_based_country_show_and_hide_panels', this.show_and_hide_panels );
+	// 		$( document.body ).on( 'wc_country_product_price_show_and_hide_panels', this.show_and_hide_panels );
 
 	// 		$(document).ready( this.product_type_not_supported_alert )
 	// 		$(document.body).on( 'woocommerce-product-type-change', this.product_type_not_supported_alert );
@@ -48,7 +48,7 @@ jQuery( function( $ ) {
 	// 		$wrapper.find( '.wccpp_show_if_manual' ).toggle( show );
 	// 		$wrapper.find( '.wccpp_hide_if_sale_dates_default').toggle( hide_sale_dates );
 
-	// 		$( document.body ).trigger( 'wc_price_based_country_manual_price_' + ( show ? 'show' : 'hide' ), [$wrapper] );
+	// 		$( document.body ).trigger( 'wc_country_product_price_manual_price_' + ( show ? 'show' : 'hide' ), [$wrapper] );
 	// 	},
 
 	// 	/**
@@ -140,10 +140,10 @@ jQuery( function( $ ) {
 		init: function(){
 			$( '.wccpp-zone-settings' ).on( 'click', '.select_eur', this.select_eur_click );
 			$( '.wccpp-zone-settings' ).on( 'click', '.select_eur_none', this.unselect_eur_click );
-			// $( '.wcpbc-zone-settings' ).on( 'keyup', '#name', this.zone_name_keyup );
-			// $( '.wcpbc-zone-settings, table.pricingzones' ).on( 'click', 'a.wcpbc-delete-zone', this.delete_click );
-			// $( '#wc_price_based_country_test_mode').on( 'change', this.test_mode_change );
-			// $( '#wc_price_based_country_test_country').closest('tr').toggle( $( '#wc_price_based_country_test_mode' ).is(':checked') );
+			// $( '.wccpp-zone-settings' ).on( 'keyup', '#name', this.zone_name_keyup );
+			// $( '.wccpp-zone-settings, table.pricingzones' ).on( 'click', 'a.wccpp-delete-zone', this.delete_click );
+			$( '#wc_country_product_price_test_mode').on( 'change', this.test_mode_change );
+			$( '#wc_country_product_price_test_country').closest('tr').toggle( $( '#wc_country_product_price_test_mode' ).is(':checked') );
 			// // Move submit button in setting page
 			// $('.wc-price-based-country-setting-wrapper-ads .wc-price-based-country-setting-content').append(
 			// 	$('.wc-price-based-country-setting-wrapper-ads').siblings('p.submit')
@@ -178,7 +178,7 @@ jQuery( function( $ ) {
 
 		// zone_name_keyup: function() {
 		// 	var zone_name = $( this ).val();
-		// 	$( '.wcpbc-zone-name' ).text( zone_name ? zone_name : wc_country_product_price_admin_params.i18n_default_zone_name );
+		// 	$( '.wccpp-zone-name' ).text( zone_name ? zone_name : wc_country_product_price_admin_params.i18n_default_zone_name );
 		// },
 
 		// delete_click: function(e) {
@@ -187,9 +187,9 @@ jQuery( function( $ ) {
 		// 	}
 		// },
 
-		// test_mode_change: function() {
-		// 	$( '#wc_price_based_country_test_country' ).closest('tr').toggle( $(this).is(':checked') )
-		// }
+		test_mode_change: function() {
+			$( '#wc_country_product_price_test_country' ).closest('tr').toggle( $(this).is(':checked') )
+		}
 	};
 
 	// wccpp_meta_boxes.init();

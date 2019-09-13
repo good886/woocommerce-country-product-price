@@ -141,24 +141,24 @@ if ( ! class_exists( 'WC_Settings_Country_Product_Price' ) ) :
 				// 	'desc_tip' => sprintf( __( 'This fired an AJAX request per page (%1$sread more%2$s).' ), '<a target="_blank" rel="noopener noreferrer" href="https://www.pricebasedcountry.com/docs/getting-started/geolocation-cache-support/?utm_source=settings&utm_medium=banner&utm_campaign=Docs">', '</a>' ),
 				// ),
 
-				// array(
-				// 	'title'    => __( 'Test mode', 'wc-country-product-price' ),
-				// 	'desc'     => __( 'Enable test mode', 'wc-country-product-price' ),
-				// 	'id'       => 'wc_country_product_price_test_mode',
-				// 	'default'  => 'no',
-				// 	'type'     => 'checkbox',
-				// 	// translators: HTML tags.
-				// 	'desc_tip' => sprintf( __( 'Enable test mode to show pricing for a specific country (%1$sHow to test%2$s).', 'wc-country-product-price' ), '<a target="_blank" rel="noopener noreferrer" href="https://www.pricebasedcountry.com/docs/getting-started/testing/?utm_source=settings&utm_medium=banner&utm_campaign=Docs">', '</a>' ),
-				// ),
+				array(
+					'title'    => __( 'Test mode', 'wc-country-product-price' ),
+					'desc'     => __( 'Enable test mode', 'wc-country-product-price' ),
+					'id'       => 'wc_country_product_price_test_mode',
+					'default'  => 'no',
+					'type'     => 'checkbox',
+					// translators: HTML tags.
+					'desc_tip' => sprintf( __( 'Enable test mode to show pricing for a specific country.', 'wc-country-product-price' ), '<a target="_blank" rel="noopener noreferrer" href="https://www.pricebasedcountry.com/docs/getting-started/testing/?utm_source=settings&utm_medium=banner&utm_campaign=Docs">', '</a>' ),
+				),
 
-				// array(
-				// 	'title'   => __( 'Test country', 'wc-country-product-price' ),
-				// 	'id'      => 'wc_country_product_price_test_country',
-				// 	'default' => wc_get_base_location(),
-				// 	'type'    => 'select',
-				// 	'class'   => 'chosen_select',
-				// 	'options' => WC()->countries->countries,
-				// ),
+				array(
+					'title'   => __( 'Test country', 'wc-country-product-price' ),
+					'id'      => 'wc_country_product_price_test_country',
+					'default' => wc_get_base_location(),
+					'type'    => 'select',
+					'class'   => 'chosen_select',
+					'options' => WC()->countries->countries,
+				),
 
 				array(
 					'type' => 'sectionend',

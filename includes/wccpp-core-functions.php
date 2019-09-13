@@ -50,13 +50,17 @@ function wccpp_get_woocommerce_country() {
 	if ( wccpp_is_woocommerce_frontend() ) {
 		$location = WC_Geolocation::geolocate_ip();
 
+		if ( get_option( 'wc_country_product_price_test_mode', 'no' ) === 'yes' && get_option( 'wc_country_product_price_test_country' ) ) {
+			$location = wc_format_country_state_string( get_option( 'wc_country_product_price_test_country' ) );
+		}
+
 		if ( $location && !empty($location['country'])) {
 			$country = $location['country']; // example: IT, DE
 		}
 
 		// $country          = wccpp_get_prop_value( wc()->customer, 'billing_country' );
 		// $shipping_country = wc()->customer->get_shipping_country();
-		// if ( ! empty( $shipping_country ) && $country !== $shipping_country && 'shipping' === get_option( 'wc_price_based_country_based_on', 'billing' ) ) {
+		// if ( ! empty( $shipping_country ) && $country !== $shipping_country && 'shipping' === get_option( 'wc_country_product_price_based_on', 'billing' ) ) {
 		// 	$country = $shipping_country;
 		// }
 
