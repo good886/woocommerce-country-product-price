@@ -110,7 +110,7 @@ class WCCPP_Pricing_Zones {
 		$zones = (array) get_option( 'wc_country_product_price_zones', array() );
 
 		if ( isset( $zones[ $zone->get_zone_id() ] ) ) {
-			foreach ( wcpbc_get_meta_keys_to_delete() as $metakey ) {
+			foreach ( wccpp_get_meta_keys_to_delete() as $metakey ) {
 				$wpdb->delete( $wpdb->postmeta, array( 'meta_key' => $zone->get_postmetakey( $metakey ) ) ); // WPCS: slow query ok.
 			}
 			unset( $zones[ $zone->get_zone_id() ] );
