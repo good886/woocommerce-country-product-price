@@ -135,7 +135,7 @@ jQuery( function( $ ) {
 	/**
 	 * Settings page actions
 	 */
-	var wccpp_settings = {
+	var wca_settings = {
 
 		init: function(){
 			$( '.wccpp-zone-settings' ).on( 'click', '.select_eur', this.select_eur_click );
@@ -194,5 +194,5 @@ jQuery( function( $ ) {
 
 	// wccpp_meta_boxes.init();
 	// wccpp_coupon_metaboxes.init();
-	wccpp_settings.init();
+	wca_settings.init();
 });

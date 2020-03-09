@@ -145,6 +145,24 @@ class WCCPP_Pricing_Zone {
 	}
 
 	/**
+	 * Get exchange rate.
+	 *
+	 * @return float
+	 */
+	public function get_exchange_rate() {
+		return floatval( $this->get_prop( 'exchange_rate' ) );
+	}
+
+	/**
+	 * Set the zone exchange rate.
+	 *
+	 * @param float $exchange_rate Zone exchange_rate.
+	 */
+	public function set_exchange_rate( $exchange_rate ) {
+		$this->set_prop( 'exchange_rate', wc_format_decimal( $exchange_rate ) );
+	}
+
+	/**
 	 * Get a meta key based on zone ID
 	 *
 	 * @param string $meta_key Metadata key.
